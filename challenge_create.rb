@@ -1,21 +1,12 @@
-# challenge_create.rb
-require_relative 'ar'
-require_relative 'models/product'
+require_relative 'config/environment'
 
-# 1. Using new and save
-product1 = Product.new(name: 'New Product 1', price: 10.0, stock_quantity: 20)
-product1.save
+# Create products
+Product.create(name: "Product A", description: "Description for Product A", price: 10.00, stock_quantity: 100)
+Product.create(name: "Product B", description: "Description for Product B", price: 20.00, stock_quantity: 200)
+Product.create(name: "Product C", description: "Description for Product C", price: 30.00, stock_quantity: 300)
 
-# 2. Using create
-product2 = Product.create(name: 'New Product 2', price: 15.0, stock_quantity: 30)
-
-# 3. Using ActiveRecord transaction
-Product.transaction do
-  product3 = Product.create!(name: 'New Product 3', price: 20.0, stock_quantity: 40)
-end
-
-# Create a Product object with missing columns (invalid object)
-invalid_product = Product.new(name: 'Short')
-unless invalid_product.save
-  puts invalid_product.errors.full_messages
+# Output created products
+puts "Created products:"
+Product.all.each do |product|
+  puts "#{product.name}: #{product.description}, Price: #{product.price}, Stock Quantity: #{product.stock_quantity}"
 end

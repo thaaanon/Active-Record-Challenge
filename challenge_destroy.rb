@@ -1,6 +1,10 @@
-# challenge_destroy.rb
-require_relative 'ar'
-require_relative 'models/product'
+require './config/environment'
 
-product_to_delete = Product.find_by(name: 'New Product 1')
-product_to_delete.destroy if product_to_delete
+# Attempt to delete a product by ID
+product = Product.find_by(name: "Product A")
+if product
+  product.destroy
+  puts "Product A deleted successfully."
+else
+  puts "Product A not found."
+end

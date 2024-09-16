@@ -1,10 +1,13 @@
-# challenge_faker_read.rb
-require_relative 'ar'
-require_relative 'models/category'
+require './config/environment'
 
-Category.includes(:products).find_each do |category|
-  puts "Category: #{category.name}"
-  category.products.each do |product|
-    puts "  Product: #{product.name}, Price: #{product.price}"
-  end
+# Load Faker gem
+require 'faker'
+
+# Generate and display random product data
+3.times do
+  puts "Name: #{Faker::Commerce.product_name}"
+  puts "Description: #{Faker::Lorem.sentence}"
+  puts "Price: #{Faker::Commerce.price(range: 10..100.0)}"
+  puts "Stock Quantity: #{Faker::Number.between(from: 1, to: 500)}"
+  puts "---------------------------"
 end

@@ -1,9 +1,10 @@
-# challenge_update.rb
-require_relative 'ar'
-require_relative 'models/product'
+require './config/environment'
 
-products = Product.where('stock_quantity > ?', 40)
-products.each do |product|
-  product.stock_quantity += 1
-  product.save
+# Update a product by ID
+product = Product.find_by(name: "Product A")
+if product
+  product.update(price: 15.00, stock_quantity: 150)
+  puts "Product A updated successfully."
+else
+  puts "Product A not found."
 end

@@ -1,0 +1,16 @@
+require 'active_record'
+require 'yaml'
+require 'erb'
+
+# Load the database configuration
+db_config = YAML.load(ERB.new(File.read('config/database.yml')).result)
+
+# Establish connection to the database
+ActiveRecord::Base.establish_connection(db_config['development'])
+
+# Define tasks
+namespace :db do
+  task :migrate do
+    ActiveRecord::Migrator.migrate('db/migrate')
+  end
+end
